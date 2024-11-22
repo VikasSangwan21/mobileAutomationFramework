@@ -4,6 +4,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
@@ -12,7 +13,7 @@ import io.cucumber.java.Before;
 
 public class Hooks {
 
-	private AppiumDriver driver;
+	private static AppiumDriver driver;
 	private AppiumDriverLocalService appiumService;
 
 	@Before
@@ -28,12 +29,12 @@ public class Hooks {
                 .setPlatformVersion("15") // Replace with your emulator's Android version
                 .setDeviceName("sdk_gphone64_x86_64")   // Replace with your emulator's name
                 .setAutomationName("UiAutomator2")
-                .setApp("C:/Users/user/Downloads/WikipediaSample.apk") // Path to the APK file
+                .setApp("C:/Users/user/Desktop/SOAR/Mobile Automation/MobileAutomation/mobileautomation/src/test/resources/application/WikipediaSample.apk") // Path to the APK file
                 .setNoReset(true) // Keeps the app data between sessions
                 .setFullReset(false); // Does not uninstall the app between sessions
 
         // Initialize the Appium driver
-        driver = new AppiumDriver(new URL("http://127.0.0.1:4723/"), options);
+        driver = new AndroidDriver(new URL("http://127.0.0.1:4723/"), options);
         System.out.println(".........................=============="+driver.toString());
         System.out.println("Appium session started. App is launched.");
     }
@@ -55,7 +56,7 @@ public class Hooks {
     }
 
 	
-    public AppiumDriver getDriver() {
+    public static AppiumDriver getDriver() {
         return driver;
     }
 }
