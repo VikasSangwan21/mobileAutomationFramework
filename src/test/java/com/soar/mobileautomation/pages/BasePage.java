@@ -1,6 +1,7 @@
 package com.soar.mobileautomation.pages;
 
 import java.time.Duration;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -25,10 +26,11 @@ public class BasePage {
      * @param WebElement
      * @param driver
      */
-	public void inputText(String inputText, WebElement WebElement,
+	public void inputText(String inputText, By by,
 			@SuppressWarnings("rawtypes") AppiumDriver driver) {
-		WebElement.clear();
-		WebElement.sendKeys(inputText);
+		WebElement element = driver.findElement(by);
+		element.clear();
+		element.sendKeys(inputText);
 		// if (driver.getKeyboard() != null) {
 		// 	closeKeyboard(driver);
 		// }
@@ -54,13 +56,45 @@ public class BasePage {
 		element.click();
 	}
 
+
+	/**
+     * Verifies if more than one search result is displayed.
+     *
+     * @param locator The By locator to find the list of elements (search results).
+     * @return True if more than one search result is displayed, false otherwise.
+     */
+    public boolean areMultipleSearchResultsDisplayed(By locator, AppiumDriver driver) {
+        try {
+            List<WebElement> searchResults = driver.findElements(locator);
+
+            // Check if there are more than one search result and they are displayed
+            if (searchResults.size() > 1) {
+                for (WebElement result : searchResults) {
+                    if (!result.isDisplayed()) {
+                        System.out.println("Search result not displayed: " + result.toString());
+                        return false;
+                    }
+                }
+                return true; // More than one result, and all are displayed
+            } else {
+                System.out.println("Less than two search results found.");
+                return false;
+            }
+        } catch (Exception e) {
+            System.err.println("Error verifying search results: " + e.getMessage());
+            return false;
+        }
+    }
+
 	/**
 	 * Method used to get text
 	 * @param WebElement
 	 * @return
 	 */
-	public String getText(WebElement WebElement) {
-		return WebElement.getText();
+	public String getText(By by,  AppiumDriver driver) {
+		WebElement element = driver.findElement(by);
+		waitForVisibilityOf(element, driver);
+		return element.getText();
 	}
 	/**
 	 * Method used to wait for visibility of element
@@ -133,6 +167,23 @@ public class BasePage {
 					break;
 			}
 		}
+
+
+    /**
+     * Verifies if an element is displayed on the screen.
+     *
+     * @param locator The By locator to identify the element.
+     * @return True if the element is displayed, false otherwise.
+     */
+    public boolean isElementDisplayed(By locator, AppiumDriver driver) {
+        try {
+            WebElement element = driver.findElement(locator);
+            return element.isDisplayed();
+        } catch (NoSuchElementException e) {
+            System.err.println("Element not found with locator: " + locator.toString());
+            return false;
+        }
+    }
 	
 
 	 

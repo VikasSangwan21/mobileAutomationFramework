@@ -1,6 +1,7 @@
 package com.soar.mobileautomation.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 import com.soar.mobileautomation.configs.Hooks;
@@ -28,6 +29,8 @@ public class HomePage extends BasePage {
 	By history = By.xpath("//android.widget.FrameLayout[@content-desc='History']");
 	By nearby = By.xpath("//android.widget.FrameLayout[@content-desc='Nearby']");
 	By browse = By.xpath("//android.widget.FrameLayout[@content-desc='Explore']");
+	By overflowOptions = By.id("org.wikipedia.alpha:id/menu_overflow_button");
+	By settingsButton = By.id("org.wikipedia.alpha:id/explore_overflow_settings");
 	
 	
 
@@ -49,6 +52,15 @@ public class HomePage extends BasePage {
 	}
 	
 
+	public void verifyHomePage() {
+		isElementDisplayed(myList, driver);
+	}
+
+	public void goToSettings(){
+		clickButton(overflowOptions, driver);
+		clickButton(settingsButton, driver);
+        System.out.println("Settings icon clicked!");
+	}
 	
 	
 }

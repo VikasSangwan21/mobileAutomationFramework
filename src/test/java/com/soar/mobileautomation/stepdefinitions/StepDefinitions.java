@@ -10,14 +10,20 @@ import io.appium.java_client.AppiumBy;
 
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 import com.soar.mobileautomation.configs.Hooks;
 import com.soar.mobileautomation.pages.HomePage;
+import com.soar.mobileautomation.pages.SearchPage;
+import com.soar.mobileautomation.pages.SettingsPage;
 
 public class StepDefinitions {
 
     private AppiumDriver driver;
     private HomePage homePage;
+    private SearchPage searchPage;
+    private SettingsPage settingsPage;
 
     public StepDefinitions() {
         // Assume the driver is initialized in a Hooks or base class
@@ -77,5 +83,47 @@ public class StepDefinitions {
             "new UiScrollable(new UiSelector()).scrollToBeginning(10)"
         ));
         System.out.println("Scrolled to the first topic of the app.");
+    }
+
+
+    @When("I search for {string} in the search bar")
+    public void iSearchForInTheSearchBar(String query) {
+        searchPage = new SearchPage();
+        searchPage.enterSearchQuery(query);
+    }
+
+    @Then("I verify the search bar expanded with returned results")
+    public void iVerifyTheSearchBarExpandedWithReturnedResults() {
+        searchPage.verifySearchResults();
+    }
+
+    @Then("I double click the close search button")
+    public void iDoubleClickTheCloseSearchButton() {
+        searchPage.clickClearQuery();
+        searchPage.clickClearQuery();
+    }
+
+    @Then("I verify the home page is displayed")
+    public void iVerifyTheHomePageIsDisplayed() {
+        homePage.verifyHomePage();
+    }
+
+
+    @When("I click on the settings icon")
+    public void iClickOnTheSettingsIcon() {
+        homePage = new HomePage();
+        homePage.goToSettings();
+    }
+
+    @When("I disable all settings options")
+    public void iDisableAllSettingsOptions() {
+        settingsPage = new SettingsPage();
+        settingsPage.disableAllSettings();
+    }
+
+    @Then("I return to the home page")
+    public void iReturnToTheHomePage() {
+        settingsPage.navigateBackToHome();
+        homePage.verifyHomePage();
     }
 }
