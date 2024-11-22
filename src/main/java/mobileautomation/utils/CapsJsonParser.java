@@ -1,4 +1,4 @@
-package com.soar.mobileautomation.utils;
+package mobileautomation.utils;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

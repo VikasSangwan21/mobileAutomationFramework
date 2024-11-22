@@ -1,4 +1,4 @@
-package com.soar.mobileautomation.utils;
+package mobileautomation.utils;
 
 import io.appium.java_client.android.AndroidDriver;
 
