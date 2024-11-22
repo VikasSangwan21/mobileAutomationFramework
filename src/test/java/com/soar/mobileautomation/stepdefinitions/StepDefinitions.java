@@ -105,6 +105,7 @@ public class StepDefinitions {
 
     @Then("I verify the home page is displayed")
     public void iVerifyTheHomePageIsDisplayed() {
+        homePage = new HomePage();
         homePage.verifyHomePage();
     }
 

@@ -10,6 +10,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.soar.mobileautomation.configs.Hooks;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
@@ -17,9 +20,6 @@ import io.appium.java_client.ios.IOSDriver;
 
 public class BasePage {
 	
-	 
-    
-    
     /**
      * Method used to input text in to text fields
      * @param inputText
@@ -54,6 +54,7 @@ public class BasePage {
 		WebElement element = driver.findElement(by);
 		waitForVisibilityOf(element, driver);
 		element.click();
+		Hooks.test.log(Status.PASS, "Clicked Element Passed");
 	}
 
 

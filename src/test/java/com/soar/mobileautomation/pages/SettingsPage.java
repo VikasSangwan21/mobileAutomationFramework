@@ -1,13 +1,8 @@
 package com.soar.mobileautomation.pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
-
 import com.soar.mobileautomation.configs.Hooks;
-
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 
 
 
@@ -18,11 +13,9 @@ public class SettingsPage extends BasePage {
 	 *    Constructor initializes screen elements
 	 */
 	@SuppressWarnings("static-access")
-	public SettingsPage()
-
-	{
-		this.driver = new Hooks().getDriver();
-		PageFactory.initElements(new AppiumFieldDecorator(this.driver),this);
+	public SettingsPage(){
+		Hooks hooks = new Hooks();
+		this.driver = hooks.getDriver();
 	}
 
     By showImages = By.xpath("(//android.widget.Switch[@resource-id=\"org.wikipedia.alpha:id/switchWidget\"])[1]");

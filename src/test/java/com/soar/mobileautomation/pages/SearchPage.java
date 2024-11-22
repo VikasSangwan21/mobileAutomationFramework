@@ -1,12 +1,10 @@
 package com.soar.mobileautomation.pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.PageFactory;
 
 import com.soar.mobileautomation.configs.Hooks;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 
 
 
@@ -17,11 +15,9 @@ public class SearchPage extends BasePage {
 	 *    Constructor initializes screen elements
 	 */
 	@SuppressWarnings("static-access")
-	public SearchPage()
-
-	{
-		this.driver = new Hooks().getDriver();
-		PageFactory.initElements(new AppiumFieldDecorator(this.driver),this);
+	public SearchPage(){
+		Hooks hooks = new Hooks();
+		this.driver = hooks.getDriver();
 	}
 
 

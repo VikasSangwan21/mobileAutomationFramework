@@ -1,13 +1,10 @@
 package com.soar.mobileautomation.pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 
 import com.soar.mobileautomation.configs.Hooks;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 
 
 
@@ -18,11 +15,9 @@ public class HomePage extends BasePage {
 	 *    Constructor initializes screen elements
 	 */
 	@SuppressWarnings("static-access")
-	public HomePage()
-
-	{
-		this.driver = new Hooks().getDriver();
-		PageFactory.initElements(new AppiumFieldDecorator(this.driver),this);
+	public HomePage(){
+		Hooks hooks = new Hooks();
+		this.driver = hooks.getDriver();
 	}
 
     By myList = By.xpath("//android.widget.FrameLayout[@content-desc='My lists']");
@@ -30,7 +25,7 @@ public class HomePage extends BasePage {
 	By nearby = By.xpath("//android.widget.FrameLayout[@content-desc='Nearby']");
 	By browse = By.xpath("//android.widget.FrameLayout[@content-desc='Explore']");
 	By overflowOptions = By.id("org.wikipedia.alpha:id/menu_overflow_button");
-	By settingsButton = By.id("org.wikipedia.alpha:id/explore_overflow_settings");
+	By settingsButton = By.xpath("//android.widget.TextView[@resource-id='org.wikipedia.alpha:id/explore_overflow_settings']");
 	
 	
 
